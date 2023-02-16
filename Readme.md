@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [PolinaT](https://up.htmlacademy.ru/javascript/28/user/2009235).
-* Наставник: `Неизвестно`.
+* Наставник: [Анатолий Долгов](https://htmlacademy.ru/profile/dolgov_anatoly).
 
 ---
 
