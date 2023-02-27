@@ -1,7 +1,7 @@
 //Функция проверки длины строки
 
 function checkLenght (string, stringLeght) {
-  if (string.length === stringLeght) {
+  if (string.length <= stringLeght) {
     //console.log('строка проходит по длине');
     return true;
   }
