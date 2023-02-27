@@ -24,21 +24,15 @@ const createRandomIdFromRangeGenerator = (min, max) => {
 };
 
 const createdIdGenerator = () => {
-  const previousValues = [];
+  let i = 0;
 
   return function () {
-    let i = 0;
     i += 1;
-
-    while (previousValues.includes(i)) {
-      i += 1;
-    }
-    previousValues.push(i);
     return i;
   };
 };
 
-const photoDescription = [
+const photoDescriptions = [
   'А как прошли твои выходные?)',
   'Работа, работа, перейди на Федота',
   'Акуна Матата',
@@ -51,7 +45,7 @@ const photoDescription = [
   'Думаете ли вы, что можете, или думаете, что не можете – в обоих случаях вы правы.',
 ];
 
-const names = [
+const userNames = [
   'Иван',
   'Хуан Себастьян',
   'Мария',
@@ -71,32 +65,32 @@ const messageBlanks = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const urlMaxCount = 25;
+const URL_MAX_COUNT = 25;
 
-const generateRandomID = createRandomIdFromRangeGenerator(1, 25); //or createdIdGenerator()
-const generateRandomURL = createRandomIdFromRangeGenerator(1, urlMaxCount);
+const generatePostID = createdIdGenerator(); //or createRandomIdFromRangeGenerator(1, 25)
+const generateRandomURL = createRandomIdFromRangeGenerator(1, URL_MAX_COUNT);
 const generateComentID = createdIdGenerator();
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const avatarMaxCount = 6;
-const likesMinCount = 15;
-const likesMaxCount = 200;
-const commentsMaxCount = 10;
+const AVATAR_MAX_COUNT = 6;
+const LIKES_MIN_COUNT = 15;
+const LIKES_MAX_COUNT = 200;
+const COMMENTS_MAX_COUNT = 10;
 
 const createComment = () => ({
   id: generateComentID(),
-  avatar: `img/avatar-${ getRandomInteger(1, avatarMaxCount) }.svg`,
+  avatar: `img/avatar-${ getRandomInteger(1, AVATAR_MAX_COUNT) }.svg`,
   message: getRandomArrayElement(messageBlanks),
-  name: getRandomArrayElement(names),
+  name: getRandomArrayElement(userNames),
 });
 
 const createPost = () => ({
-  id: generateRandomID(),
+  id: generatePostID(),
   url: `photos/${ generateRandomURL() }.jpg`,
-  description: getRandomArrayElement(photoDescription),
-  likes: getRandomInteger(likesMinCount, likesMaxCount),
-  comments: Array.from({length: getRandomInteger(0, commentsMaxCount)}, createComment),
+  description: getRandomArrayElement(photoDescriptions),
+  likes: getRandomInteger(LIKES_MIN_COUNT, LIKES_MAX_COUNT),
+  comments: Array.from({length: getRandomInteger(0, COMMENTS_MAX_COUNT)}, createComment),
 });
 
 const similarPosts = () => Array.from({length: 25}, createPost);
