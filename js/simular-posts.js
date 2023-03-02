@@ -43,27 +43,23 @@ const COMMENTS_MAX_COUNT = 10;
 
 const generatePostID = createdIdGenerator();
 const generateRandomURL = createRandomIdFromRangeGenerator(1, URL_MAX_COUNT);
-//const generateComentID = createdIdGenerator();
+const generateComentID = createdIdGenerator();
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const createComment = (index) => ({
-  //id: generateComentID(),
-  id: index,
+const createComment = () => ({
+  id: generateComentID(),
   avatar: `img/avatar-${ getRandomInteger(1, AVATAR_MAX_COUNT) }.svg`,
   message: getRandomArrayElement(messageBlanks),
   name: getRandomArrayElement(userNames),
 });
-
-const createComments = () => Array.from({length: getRandomInteger(0, COMMENTS_MAX_COUNT)}, (_, commentIndex) => createComment(commentIndex + 1));
 
 const createPost = () => ({
   id: generatePostID(),
   url: `photos/${ generateRandomURL() }.jpg`,
   description: getRandomArrayElement(photoDescriptions),
   likes: getRandomInteger(LIKES_MIN_COUNT, LIKES_MAX_COUNT),
-  //comments: Array.from({length: getRandomInteger(0, COMMENTS_MAX_COUNT)}, createComment),
-  comments: createComments(),
+  comments: Array.from({length: getRandomInteger(0, COMMENTS_MAX_COUNT)}, createComment),
 });
 
 const simularPosts = () => Array.from({length: 25}, createPost);
