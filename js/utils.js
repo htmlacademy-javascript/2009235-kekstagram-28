@@ -6,8 +6,6 @@ const getRandomInteger = (min, max) => {
   return Math.floor(result);
 };
 
-export {getRandomInteger};
-
 const createRandomIdFromRangeGenerator = (min, max) => {
   const previousValues = [];
 
@@ -25,8 +23,6 @@ const createRandomIdFromRangeGenerator = (min, max) => {
   };
 };
 
-export {createRandomIdFromRangeGenerator};
-
 const createdIdGenerator = () => {
   let i = 0;
 
@@ -36,4 +32,8 @@ const createdIdGenerator = () => {
   };
 };
 
-export {createdIdGenerator};
+export {
+  getRandomInteger,
+  createRandomIdFromRangeGenerator,
+  createdIdGenerator,
+};

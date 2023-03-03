@@ -1,6 +1,8 @@
-import {getRandomInteger} from './utils.js';
-import {createRandomIdFromRangeGenerator} from './utils.js';
-import {createdIdGenerator} from './utils.js';
+import {
+  createRandomIdFromRangeGenerator,
+  createdIdGenerator,
+  getRandomInteger,
+} from './utils.js';
 
 const photoDescriptions = [
   'А как прошли твои выходные?)',
