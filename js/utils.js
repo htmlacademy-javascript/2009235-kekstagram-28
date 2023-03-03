@@ -1,4 +1,12 @@
-import {getRandomInteger} from './get-random-integer.js';
+const getRandomInteger = (min, max) => {
+  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
+  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
+  const result = Math.random() * (upper - lower + 1) + lower;
+
+  return Math.floor(result);
+};
+
+export {getRandomInteger};
 
 const createRandomIdFromRangeGenerator = (min, max) => {
   const previousValues = [];
@@ -18,3 +26,14 @@ const createRandomIdFromRangeGenerator = (min, max) => {
 };
 
 export {createRandomIdFromRangeGenerator};
+
+const createdIdGenerator = () => {
+  let i = 0;
+
+  return function () {
+    i += 1;
+    return i;
+  };
+};
+
+export {createdIdGenerator};
