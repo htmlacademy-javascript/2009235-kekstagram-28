@@ -11,11 +11,12 @@ const simularPictures = simularPosts(POSTS_COUNT);
 
 const simularListFragment = document.createDocumentFragment();
 
-simularPictures.forEach((picture) => {
+simularPictures.forEach(({ url, description, likes, comments}) => {
   const pictureElement = newPictureTemplate.cloneNode(true);
-  pictureElement.querySelector('.picture__img').src = picture.url;
-  pictureElement.querySelector('.picture__likes').textContent = picture.likes;
-  pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
+  pictureElement.querySelector('.picture__img').src = url;
+  pictureElement.querySelector('.picture__img').alt = description;
+  pictureElement.querySelector('.picture__likes').textContent = likes;
+  pictureElement.querySelector('.picture__comments').textContent = comments.length;
   simularListFragment.appendChild(pictureElement);
 });
 
