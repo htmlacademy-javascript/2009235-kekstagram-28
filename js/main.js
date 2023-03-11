@@ -1,1 +1,3 @@
-import './pictures.js';
+import {addPosts} from './pictures.js';
+
+addPosts();

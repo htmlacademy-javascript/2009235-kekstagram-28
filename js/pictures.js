@@ -19,4 +19,6 @@ simularPictures.forEach((picture) => {
   simularListFragment.appendChild(pictureElement);
 });
 
-picturesList.appendChild(simularListFragment);
+const addPosts = () => picturesList.appendChild(simularListFragment);
+
+export {addPosts};
