@@ -5,8 +5,9 @@ const newPictureTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
 
-const simularPictures = simularPosts();
-//console.log(similarPictures);
+const POSTS_COUNT = 25;
+const simularPictures = simularPosts(POSTS_COUNT);
+//console.log(simularPictures);
 
 const simularListFragment = document.createDocumentFragment();
 

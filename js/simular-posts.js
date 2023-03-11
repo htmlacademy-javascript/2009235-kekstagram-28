@@ -64,6 +64,6 @@ const createPost = () => ({
   comments: Array.from({length: getRandomInteger(0, COMMENTS_MAX_COUNT)}, createComment),
 });
 
-const simularPosts = () => Array.from({length: 25}, createPost);
+const simularPosts = (count) => Array.from({length: count}, createPost);
 
 export {simularPosts};
