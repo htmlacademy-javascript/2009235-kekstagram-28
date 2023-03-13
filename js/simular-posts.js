@@ -1,6 +1,8 @@
-import {getRandomInteger} from './utils.js';
-import {createRandomIdFromRangeGenerator} from './utils.js';
-import {createdIdGenerator} from './utils.js';
+import {
+  createRandomIdFromRangeGenerator,
+  createdIdGenerator,
+  getRandomInteger,
+} from './utils.js';
 
 const photoDescriptions = [
   'А как прошли твои выходные?)',
@@ -62,6 +64,6 @@ const createPost = () => ({
   comments: Array.from({length: getRandomInteger(0, COMMENTS_MAX_COUNT)}, createComment),
 });
 
-const simularPosts = () => Array.from({length: 25}, createPost);
+const simularPosts = (count) => Array.from({length: count}, createPost);
 
 export {simularPosts};

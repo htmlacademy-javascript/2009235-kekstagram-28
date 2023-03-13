@@ -1,6 +1,3 @@
-import {simularPosts} from './simular-posts.js';
+import {addPosts} from './pictures.js';
 
-simularPosts();
-
-//console.log(simularPosts());
-
+addPosts();
