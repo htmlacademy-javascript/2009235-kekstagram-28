@@ -7,7 +7,6 @@ const newPictureTemplate = document.querySelector('#picture')
 
 const POSTS_COUNT = 25;
 const simularPictures = simularPosts(POSTS_COUNT);
-//console.log(simularPictures);
 
 const simularListFragment = document.createDocumentFragment();
 
@@ -22,4 +21,6 @@ simularPictures.forEach(({ url, description, likes, comments}) => {
 
 const addPosts = () => picturesList.appendChild(simularListFragment);
 
-export {addPosts};
+addPosts();
+
+export {simularPictures};

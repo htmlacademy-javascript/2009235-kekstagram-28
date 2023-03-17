@@ -1,3 +1,2 @@
-import {addPosts} from './pictures.js';
-
-addPosts();
+import './add-pictures.js';
+import './picture-modal.js';
