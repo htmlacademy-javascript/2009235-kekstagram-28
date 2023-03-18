@@ -54,6 +54,7 @@ modalWindowShowCommentsButton.addEventListener('click', () => {
 
 function userModalElementClearContent () {
   vievCommentsCount = VIEV_COMMENTS_COUNT;
+  modalWindowShowCommentsButton.removeEventListener('click');
 }
 
 export {showFirstComments,userModalElementClearContent};
