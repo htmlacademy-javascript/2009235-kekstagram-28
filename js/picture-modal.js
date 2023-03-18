@@ -28,32 +28,22 @@ function closeUserModal () {
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
-for (const userModalOpenElement of userModalOpenElements) {
-  userModalOpenElement.addEventListener('click', (evt) => {
+function listenModalOpenElement (item) {
+  item.addEventListener('click', (evt) => {
     evt.preventDefault();
-    openUserModal(userModalOpenElement);
+    openUserModal(item);
   });
 
-  userModalOpenElement.addEventListener('keydown', (evt) => {
+  item.addEventListener('keydown', (evt) => {
     evt.preventDefault();
     if (isEnterKey(evt)) {
-      openUserModal(userModalOpenElement);
+      openUserModal(item);
     }
   });
 }
 
-for (const userModalOpenElement of userModalOpenElements) {
-  userModalOpenElement.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    openUserModal(userModalOpenElement);
-  });
-
-  userModalOpenElement.addEventListener('keydown', (evt) => {
-    evt.preventDefault();
-    if (isEnterKey(evt)) {
-      openUserModal(userModalOpenElement);
-    }
-  });
+for (let i = 0; i < userModalOpenElements.length; i++) {
+  listenModalOpenElement(userModalOpenElements[i]);
 }
 
 userModalCloseElement.addEventListener('click', () => {

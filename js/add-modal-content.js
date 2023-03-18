@@ -12,15 +12,7 @@ const modalWindowCommentsCount = modalWindow.querySelector('.comments-count');
 
 const getPostData = (userModalOpenElement) => {
   const postID = +userModalOpenElement.dataset.pictureId;
-  let postData;
-
-  for (let i = 0; i < postsData.length; i++) {
-    if (postsData[i].id === postID) {
-      postData = postsData[i];
-      break;
-    }
-  }
-
+  const postData = postsData.find((item) => item.id === postID);
   return postData;
 };
 
