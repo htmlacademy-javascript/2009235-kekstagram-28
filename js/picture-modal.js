@@ -1,6 +1,5 @@
 import {isEscapeKey, isEnterKey} from './utils.js';
 import {userModalElementAddContent} from './add-modal-content.js';
-import {userModalElementClearContent} from './show-modal-masseges.js';
 
 const userModalElement = document.querySelector('.big-picture');
 const userModalOpenElementList = document.querySelector('.pictures');
@@ -27,7 +26,6 @@ function closeUserModal () {
   document.body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onDocumentKeydown);
-  userModalElementClearContent();
 }
 
 for (const userModalOpenElement of userModalOpenElements) {

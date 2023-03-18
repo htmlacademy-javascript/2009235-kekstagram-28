@@ -9,30 +9,25 @@ const modalWindowDescription = modalWindow.querySelector('.social__caption');
 const modalWindowLikesCount = modalWindow.querySelector('.likes-count');
 const modalWindowCommentsCount = modalWindow.querySelector('.comments-count');
 
-let postData;
 
-function userModalElementAddContent (evt) {
-  const newImage = evt.querySelector('.picture__img');
-  modalWindowImage.src = newImage.src;
-  modalWindowImage.alt = newImage.alt;
+const getPostData = (userModalOpenElement) => {
+  const postID = +userModalOpenElement.dataset.pictureId;
+  let postData;
 
   for (let i = 0; i < postsData.length; i++) {
-    if (postsData[i].url === newImage.getAttribute('src')) {
+    if (postsData[i].id === postID) {
       postData = postsData[i];
+      break;
     }
   }
 
-  modalWindowDescription.textContent = postData.description;
-  modalWindowLikesCount.textContent = postData.likes;
-  modalWindowCommentsCount.textContent = postData.comments.length;
-  addComments();
-  showFirstComments();
-}
+  return postData;
+};
 
 const modalWindowCommentsList = modalWindow.querySelector('.social__comments');
 const modalWindowCommentsItem = modalWindow.querySelector('.social__comment');
 
-function addComments () {
+const addComments = (postData) => {
   modalWindowCommentsList.innerHTML = '';
 
   const simularListComments = document.createDocumentFragment();
@@ -49,6 +44,18 @@ function addComments () {
   });
 
   modalWindowCommentsList.appendChild(simularListComments);
-}
+};
+
+const userModalElementAddContent = (userModalOpenElement) => {
+  const postData = getPostData(userModalOpenElement);
+
+  modalWindowImage.src = postData.url;
+  modalWindowImage.alt = postData.description;
+  modalWindowDescription.textContent = postData.description;
+  modalWindowLikesCount.textContent = postData.likes;
+  modalWindowCommentsCount.textContent = postData.comments.length;
+  addComments(postData);
+  showFirstComments();
+};
 
 export {userModalElementAddContent};
