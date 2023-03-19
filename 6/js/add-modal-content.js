@@ -1,5 +1,5 @@
 import {simularPictures} from './add-pictures.js';
-import {showFirstComments} from './show-modal-masseges.js';
+import {showFirstComments} from './show-modal-massages.js';
 const postsData = simularPictures;
 //console.log(postsData);
 
@@ -14,10 +14,6 @@ const getPostData = (userModalOpenElement) => {
   const postID = +userModalOpenElement.dataset.pictureId;
   const postData = postsData.find((item) => item.id === postID);
 
-  if (!postData) {
-    return;
-  }
-
   return postData;
 };
 
@@ -29,7 +25,6 @@ const addComments = (postData) => {
 
   const simularListComments = document.createDocumentFragment();
   const postDataComments = postData.comments;
-  postDataComments.reverse();
 
   postDataComments.forEach(({ avatar, message, name}) => {
     const newUserComment = modalWindowCommentsItem.cloneNode(true);
