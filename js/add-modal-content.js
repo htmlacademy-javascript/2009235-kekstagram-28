@@ -1,5 +1,5 @@
 import {simularPictures} from './add-pictures.js';
-import {showFirstComments} from './show-modal-massages.js';
+import {showFirstComments} from './show-modal-messages.js';
 const postsData = simularPictures;
 //console.log(postsData);
 
