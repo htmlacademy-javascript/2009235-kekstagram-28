@@ -13,11 +13,18 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
+const onOutsideModalWindow = (evt) => {
+  if (evt.target === evt.currentTarget) {
+    closeUserModal();
+  }
+};
+
 function openUserModal (evt) {
   userModalElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
   document.addEventListener('keydown', onDocumentKeydown);
+  userModalElement.addEventListener('click', onOutsideModalWindow);
   userModalElementAddContent(evt);
 }
 
@@ -26,6 +33,7 @@ function closeUserModal () {
   document.body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onDocumentKeydown);
+  userModalElement.removeEventListener('click', onOutsideModalWindow);
 }
 
 function listenModalOpenElement (item) {
@@ -48,12 +56,6 @@ for (let i = 0; i < userModalOpenElements.length; i++) {
 
 userModalCloseElement.addEventListener('click', () => {
   closeUserModal();
-});
-
-userModalElement.addEventListener('click', (evt) => {
-  if (evt.target === evt.currentTarget) {
-    closeUserModal();
-  }
 });
 
 userModalCloseElement.addEventListener('keydown', (evt) => {
