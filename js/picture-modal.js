@@ -50,7 +50,7 @@ function listenModalOpenElement (item) {
   });
 }
 
-for (let i = 0; i < userModalOpenElements.length; i++) {
+for (let i = userModalOpenElements.length - 1; i >= 0; i--) {
   if (userModalOpenElements[i].classList.contains('picture')) {
     listenModalOpenElement(userModalOpenElements[i]);
   }
