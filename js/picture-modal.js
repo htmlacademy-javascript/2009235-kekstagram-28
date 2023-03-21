@@ -3,7 +3,7 @@ import {userModalElementAddContent} from './add-modal-content.js';
 
 const userModalElement = document.querySelector('.big-picture');
 const userModalOpenElementList = document.querySelector('.pictures');
-const userModalOpenElements = userModalOpenElementList.querySelectorAll('.picture');
+const userModalOpenElements = userModalOpenElementList.children;
 const userModalCloseElement = userModalElement.querySelector('#picture-cancel');
 
 const onDocumentKeydown = (evt) => {
@@ -51,7 +51,9 @@ function listenModalOpenElement (item) {
 }
 
 for (let i = 0; i < userModalOpenElements.length; i++) {
-  listenModalOpenElement(userModalOpenElements[i]);
+  if (userModalOpenElements[i].classList.contains('picture')) {
+    listenModalOpenElement(userModalOpenElements[i]);
+  }
 }
 
 userModalCloseElement.addEventListener('click', () => {

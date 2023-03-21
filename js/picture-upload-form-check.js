@@ -26,12 +26,12 @@ const regexpHashtag = /'^#[a-zа-яё0-9]$'/i;
 function validateHashtag (value) {
   const hashtags = value.split(' ');
   hashtags.forEach((hashtag) => {
-    regexpImageJpg.test(hashtag.trim());
+    regexpHashtag.test(hashtag.trim());
   });
 }
 
 pristine.addValidator(
-  uploadImageForm.querySelector(),
+  uploadImageForm.querySelector('input[name="hashtags"]'),
   validateHashtag,
 );
 
@@ -41,9 +41,11 @@ uploadImageForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   const isValid = pristine.validate();
-    if (isValid) {
-      console.log('Можно отправлять');
-    }
+  if (isValid) {
+    console.log('Можно отправлять');
+  } else {
+    console.log('Отправлять нельзя');
+  }
 });
 
 
