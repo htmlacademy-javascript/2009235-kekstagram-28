@@ -1,10 +1,8 @@
 import {isEscapeKey, isEnterKey} from './utils.js';
-import {userModalElementAddContent} from './add-modal-content.js';
 
-const userModalElement = document.querySelector('.big-picture');
-const userModalOpenElementList = document.querySelector('.pictures');
-const userModalOpenElements = userModalOpenElementList.querySelectorAll('.picture');
-const userModalCloseElement = userModalElement.querySelector('#picture-cancel');
+const userModalElement = document.querySelector('.img-upload__overlay');
+const userModalOpenElement = document.querySelector('.img-upload__control');
+const userModalCloseElement = userModalElement.querySelector('#upload-cancel');
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -19,13 +17,12 @@ const onOutsideModalWindow = (evt) => {
   }
 };
 
-function openUserModal (evt) {
+function openUserModal () {
   userModalElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
   document.addEventListener('keydown', onDocumentKeydown);
   userModalElement.addEventListener('click', onOutsideModalWindow);
-  userModalElementAddContent(evt);
 }
 
 function closeUserModal () {
@@ -36,23 +33,19 @@ function closeUserModal () {
   userModalElement.removeEventListener('click', onOutsideModalWindow);
 }
 
-function listenModalOpenElement (item) {
-  item.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    openUserModal(item);
-  });
 
-  item.addEventListener('keydown', (evt) => {
-    evt.preventDefault();
-    if (isEnterKey(evt)) {
-      openUserModal(item);
-    }
-  });
-}
+userModalOpenElement.addEventListener('click', () => {
+  //evt.preventDefault();
+  openUserModal();
+});
 
-for (let i = 0; i < userModalOpenElements.length; i++) {
-  listenModalOpenElement(userModalOpenElements[i]);
-}
+userModalOpenElement.addEventListener('keydown', (evt) => {
+  evt.preventDefault();
+  if (isEnterKey(evt)) {
+    openUserModal();
+  }
+});
+
 
 userModalCloseElement.addEventListener('click', () => {
   closeUserModal();
