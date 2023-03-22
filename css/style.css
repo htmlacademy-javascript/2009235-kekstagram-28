@@ -1408,3 +1408,19 @@ main {
 .hidden {
   display: none;
 }
+
+.img-upload__field-wrapper__error-text {
+  width: 450px;
+  margin: 0 auto;
+  margin-top: -5px;
+  margin-bottom: 15px;
+  text-align: left;
+  text-transform: none;
+  padding-left: 5px;
+  color: #e90000;
+}
+
+.img-upload__field-wrapper:last-child .img-upload__field-wrapper__error-text {
+  margin-top: 5px;
+  margin-bottom: 0;
+}

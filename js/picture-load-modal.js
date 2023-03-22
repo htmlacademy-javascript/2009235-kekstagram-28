@@ -1,4 +1,5 @@
 import {isEscapeKey, isEnterKey} from './utils.js';
+import {pristine} from './picture-upload-form-check.js';
 
 const userModalElement = document.querySelector('.img-upload__overlay');
 const userModalOpenElement = document.querySelector('#upload-file');
@@ -6,6 +7,7 @@ const userModalCloseElement = userModalElement.querySelector('#upload-cancel');
 
 const userModalForm = document.querySelector('#upload-select-image');
 const hashtagsInput = userModalForm.querySelector('input[name="hashtags"]');
+const commentInput = document.querySelector('textarea[name="description"]');
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -50,6 +52,7 @@ userModalCloseElement.addEventListener('click', (evt) => {
 function resetForm () {
   if (userModalForm) {
     userModalForm.reset();
+    pristine.reset();
   }
 }
 
@@ -64,4 +67,12 @@ hashtagsInput.addEventListener('keydown', (evt) => {
   if (isEscapeKey(evt)) {
     evt.stopPropagation();
   }
+});
+
+commentInput.addEventListener('focus', () => {
+  document.removeEventListener('keydown', onDocumentKeydown);
+});
+
+commentInput.addEventListener('blur', () => {
+  document.addEventListener('keydown', onDocumentKeydown);
 });
