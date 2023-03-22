@@ -3,8 +3,9 @@ import {isEscapeKey, isEnterKey} from './utils.js';
 const userModalElement = document.querySelector('.img-upload__overlay');
 const userModalOpenElement = document.querySelector('#upload-file');
 const userModalCloseElement = userModalElement.querySelector('#upload-cancel');
-const userModalForm = document.querySelector('#upload-select-image');
 
+const userModalForm = document.querySelector('#upload-select-image');
+const hashtagsInput = userModalForm.querySelector('input[name="hashtags"]');
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -25,7 +26,6 @@ function openUserModal () {
 
   document.addEventListener('keydown', onDocumentKeydown);
   userModalElement.addEventListener('click', onOutsideModalWindow);
-  resetForm();
 }
 
 function closeUserModal () {
@@ -34,6 +34,7 @@ function closeUserModal () {
 
   document.removeEventListener('keydown', onDocumentKeydown);
   userModalElement.removeEventListener('click', onOutsideModalWindow);
+  resetForm();
 }
 
 
@@ -55,5 +56,12 @@ function resetForm () {
 userModalCloseElement.addEventListener('keydown', (evt) => {
   if (isEnterKey(evt)) {
     closeUserModal();
+  }
+});
+
+
+hashtagsInput.addEventListener('keydown', (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.stopPropagation();
   }
 });
