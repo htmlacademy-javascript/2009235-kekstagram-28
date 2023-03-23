@@ -7,7 +7,7 @@ const userModalCloseElement = userModalElement.querySelector('#upload-cancel');
 
 const userModalForm = document.querySelector('#upload-select-image');
 const hashtagsInput = userModalForm.querySelector('input[name="hashtags"]');
-const commentInput = document.querySelector('textarea[name="description"]');
+const commentInput = userModalForm.querySelector('textarea[name="description"]');
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -69,10 +69,8 @@ hashtagsInput.addEventListener('keydown', (evt) => {
   }
 });
 
-commentInput.addEventListener('focus', () => {
-  document.removeEventListener('keydown', onDocumentKeydown);
-});
-
-commentInput.addEventListener('blur', () => {
-  document.addEventListener('keydown', onDocumentKeydown);
+commentInput.addEventListener('keydown', (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.stopPropagation();
+  }
 });
