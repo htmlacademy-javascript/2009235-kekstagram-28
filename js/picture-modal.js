@@ -3,7 +3,7 @@ import {userModalElementAddContent} from './add-modal-content.js';
 
 const userModalElement = document.querySelector('.big-picture');
 const userModalOpenElementList = document.querySelector('.pictures');
-const userModalOpenElements = userModalOpenElementList.querySelectorAll('.picture');
+const userModalOpenElements = userModalOpenElementList.children;
 const userModalCloseElement = userModalElement.querySelector('#picture-cancel');
 
 const onDocumentKeydown = (evt) => {
@@ -19,13 +19,12 @@ const onOutsideModalWindow = (evt) => {
   }
 };
 
-function openUserModal (evt) {
+function openUserModal () {
   userModalElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
   document.addEventListener('keydown', onDocumentKeydown);
   userModalElement.addEventListener('click', onOutsideModalWindow);
-  userModalElementAddContent(evt);
 }
 
 function closeUserModal () {
@@ -39,19 +38,22 @@ function closeUserModal () {
 function listenModalOpenElement (item) {
   item.addEventListener('click', (evt) => {
     evt.preventDefault();
-    openUserModal(item);
+    openUserModal();
+    userModalElementAddContent(item);
   });
 
   item.addEventListener('keydown', (evt) => {
     evt.preventDefault();
     if (isEnterKey(evt)) {
-      openUserModal(item);
+      openUserModal();
     }
   });
 }
 
-for (let i = 0; i < userModalOpenElements.length; i++) {
-  listenModalOpenElement(userModalOpenElements[i]);
+for (let i = userModalOpenElements.length - 1; i >= 0; i--) {
+  if (userModalOpenElements[i].classList.contains('picture')) {
+    listenModalOpenElement(userModalOpenElements[i]);
+  }
 }
 
 userModalCloseElement.addEventListener('click', () => {
