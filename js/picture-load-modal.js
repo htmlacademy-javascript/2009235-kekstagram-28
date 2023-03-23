@@ -1,5 +1,7 @@
 import {isEscapeKey, isEnterKey} from './utils.js';
 import {pristine} from './picture-upload-form-check.js';
+import {setDefaultZoomValue} from './set-picture-size.js';
+import {defaultFilter} from './set-picture-filter.js';
 
 const userModalElement = document.querySelector('.img-upload__overlay');
 const userModalOpenElement = document.querySelector('#upload-file');
@@ -37,6 +39,8 @@ function closeUserModal () {
   document.removeEventListener('keydown', onDocumentKeydown);
   userModalElement.removeEventListener('click', onOutsideModalWindow);
   resetForm();
+  setDefaultZoomValue();
+  defaultFilter();
 }
 
 
