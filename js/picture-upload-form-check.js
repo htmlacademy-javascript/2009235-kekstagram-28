@@ -5,7 +5,7 @@ const MAX_COMMENT_LENGTH = 140;
 const uploadImageForm = document.querySelector('#upload-select-image');
 const uploadFile = uploadImageForm.querySelector('#upload-file');
 const hashtagsInput = uploadImageForm.querySelector('input[name="hashtags"]');
-const commentInput = document.querySelector('textarea[name="description"]');
+const commentInput = uploadImageForm.querySelector('textarea[name="description"]');
 
 const regexpHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 let hashtagsErrorMessage = '';
@@ -104,7 +104,7 @@ uploadImageForm.addEventListener('submit', (evt) => {
   pristine.validate();
   /*const isValid = pristine.validate();
   if (isValid) {
-     console.log('Можно отправлять');
+    console.log('Можно отправлять');
   } else {
     console.log('Форма невалидна');
   }*/
