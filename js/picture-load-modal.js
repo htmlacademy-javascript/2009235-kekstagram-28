@@ -7,7 +7,7 @@ const userModalCloseElement = userModalElement.querySelector('#upload-cancel');
 
 const userModalForm = document.querySelector('#upload-select-image');
 const hashtagsInput = userModalForm.querySelector('input[name="hashtags"]');
-const commentInput = document.querySelector('textarea[name="description"]');
+const commentInput = userModalForm.querySelector('textarea[name="description"]');
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
