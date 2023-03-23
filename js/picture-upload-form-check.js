@@ -109,16 +109,4 @@ pristine.addValidator(
 
 /*----------*/
 
-uploadImageForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
-
-  /*const isValid = pristine.validate();
-  if (isValid) {
-    console.log('Можно отправлять');
-  } else {
-    console.log('Форма невалидна');
-  }*/
-});
-
 export {pristine};
