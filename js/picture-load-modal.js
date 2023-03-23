@@ -69,10 +69,8 @@ hashtagsInput.addEventListener('keydown', (evt) => {
   }
 });
 
-commentInput.addEventListener('focus', () => {
-  document.removeEventListener('keydown', onDocumentKeydown);
-});
-
-commentInput.addEventListener('blur', () => {
-  document.addEventListener('keydown', onDocumentKeydown);
+commentInput.addEventListener('keydown', (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.stopPropagation();
+  }
 });

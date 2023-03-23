@@ -1,10 +1,15 @@
+const MAX_HASHTAGS_COUNT = 5;
+const MAX_HASHTAG_LENGHT = 20;
+const MAX_COMMENT_LENGTH = 140;
+
 const uploadImageForm = document.querySelector('#upload-select-image');
 const uploadFile = uploadImageForm.querySelector('#upload-file');
 const hashtagsInput = uploadImageForm.querySelector('input[name="hashtags"]');
 const commentInput = document.querySelector('textarea[name="description"]');
 
 const regexpHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
-let errorMessage = '';
+let hashtagsErrorMessage = '';
+const commentErrorMessage = `До ${ MAX_COMMENT_LENGTH } символов`;
 
 const pristine = new Pristine(uploadImageForm, {
   classTo: 'img-upload__field-wrapper',
@@ -31,78 +36,78 @@ const validateHashtag = (value) => {
 
   if (value.trim() === ''){
     errors++;
-    errorMessage = 'Веедены только пробелы.';
+    hashtagsErrorMessage = 'Введены только пробелы.';
   }
 
   const hashtags = value.split(' ').filter((hashtag) => hashtag.length > 0);
 
-  if (hashtags.length > 5) {
+  if (hashtags.length > MAX_HASHTAGS_COUNT) {
     errors++;
-    errorMessage = 'Нельзя указать больше пяти хэш-тегов.';
+    hashtagsErrorMessage = `Нельзя указать больше ${ MAX_HASHTAGS_COUNT } хэш-тегов.`;
   }
 
-  const lowerCasehashtags = hashtags.map((hashtag) => hashtag.toLowerCase());
-  const duplicates = lowerCasehashtags.filter((number, index, numbers) => numbers.indexOf(number) !== index);
+  const lowerCaseHashtags = hashtags.map((hashtag) => hashtag.toLowerCase());
+  const duplicates = lowerCaseHashtags.filter((hashtag, index, hashtagsArray) => hashtagsArray.indexOf(hashtag) !== index);
 
   if (duplicates.length > 0) {
     errors++;
-    errorMessage = 'Один и тот же хэш-тег не может быть использован дважды.';
+    hashtagsErrorMessage = 'Один и тот же хэш-тег не может быть использован дважды.';
   }
 
   hashtags.forEach((hashtag) => {
     if (!regexpHashtag.test(hashtag)) {
       errors++;
+      hashtagsErrorMessage = 'Хеш-тег должен состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т.п.), символы пунктуации (тире, дефис, запятая и т.п.), эмодзи и т.д.';
     }
 
-    if (!/[a-zа-яё0-9]{1,19}$/i.test(hashtag)) {
-      errorMessage = 'Хеш-тег должен состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т.п.), символы пунктуации (тире, дефис, запятая и т.п.), эмодзи и т.д.';
-    }
-
-    if (hashtag.length > 20) {
-      errorMessage = 'Максимальная длина одного хэш-тега 20 символов, включая решётку.';
+    if (hashtag.length > MAX_HASHTAG_LENGHT) {
+      hashtagsErrorMessage = `Максимальная длина одного хэш-тега ${ MAX_HASHTAG_LENGHT } символов, включая решётку.`;
     }
 
     if (!/^#/.test(hashtag)) {
-      errorMessage = 'Хеш-тег должен начинаться с решётки.';
-    }
-
-    if (hashtag.length === 1 && hashtag[0] === '#') {
-      errorMessage = 'Хеш-тег не может состоять только из одной решётки.';
+      hashtagsErrorMessage = 'Хеш-тег должен начинаться с решётки.';
+    } else if (hashtag.length === 1) {
+      hashtagsErrorMessage = 'Хеш-тег не может состоять только из одной решётки.';
     }
   });
 
   if (value.trim() === '#'){
     errors++;
-    errorMessage = 'Хеш-тег не может состоять только из одной решётки.';
+    hashtagsErrorMessage = 'Хеш-тег не может состоять только из одной решётки.';
   }
 
   return errors === 0;
-}
+};
 
-const validateHashtagMassage = () => errorMessage;
+const validateHashtagMessage = () => hashtagsErrorMessage;
 
 pristine.addValidator(
   hashtagsInput,
   validateHashtag,
-  validateHashtagMassage,
+  validateHashtagMessage,
 );
 
 /*----------*/
 
-const validateComment = (value) => {
-  if (value.length === 0){
-    return true;
-  }
-
-  return value.length <= 140;
-};
+const validateComment = (value) => value.length === 0 || value.length <= MAX_COMMENT_LENGTH;
 
 pristine.addValidator(
   commentInput,
   validateComment,
-  'До 140 символов',
+  commentErrorMessage,
 );
 
 /*----------*/
+
+uploadImageForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  pristine.validate();
+  /*const isValid = pristine.validate();
+  if (isValid) {
+     console.log('Можно отправлять');
+  } else {
+    console.log('Форма невалидна');
+  }*/
+});
 
 export {pristine};
