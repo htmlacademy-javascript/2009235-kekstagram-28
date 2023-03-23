@@ -3,6 +3,9 @@ const uploadFile = uploadImageForm.querySelector('#upload-file');
 const hashtagsInput = uploadImageForm.querySelector('input[name="hashtags"]');
 const commentInput = document.querySelector('textarea[name="description"]');
 
+const regexpHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
+let errorMessage = '';
+
 const pristine = new Pristine(uploadImageForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
@@ -10,9 +13,7 @@ const pristine = new Pristine(uploadImageForm, {
 });
 
 
-function validateFile (value) {
-  return /.jpg$/i.test(value) || /.png$/i.test(value) || /.jpeg$/i.test(value);
-}
+const validateFile = (value) => /.jpg$/i.test(value) || /.png$/i.test(value) || /.jpeg$/i.test(value);
 
 pristine.addValidator(
   uploadFile,
@@ -21,10 +22,7 @@ pristine.addValidator(
 
 /*----------*/
 
-const regexpHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
-let errorMessage = '';
-
-function validateHashtag (value) {
+const validateHashtag = (value) => {
   if (value.length === 0){
     return true;
   }
@@ -81,9 +79,7 @@ function validateHashtag (value) {
   return errors === 0;
 }
 
-function validateHashtagMassage () {
-  return errorMessage;
-}
+const validateHashtagMassage = () => errorMessage;
 
 pristine.addValidator(
   hashtagsInput,
@@ -93,13 +89,13 @@ pristine.addValidator(
 
 /*----------*/
 
-function validateComment (value) {
+const validateComment = (value) => {
   if (value.length === 0){
     return true;
   }
 
   return value.length <= 140;
-}
+};
 
 pristine.addValidator(
   commentInput,
