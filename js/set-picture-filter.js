@@ -62,6 +62,9 @@ const filters = uploadImageForm.querySelectorAll('.effects__radio');
 const sliderContainer = uploadImageForm.querySelector('.img-upload__effect-level');
 const picturePreview = uploadImageForm.querySelector('.img-upload__preview');
 
+let elementData = '';
+let oldElementData = '';
+
 noUiSlider.create(sliderElement, {
   range: {
     min: 0,
@@ -86,8 +89,17 @@ noUiSlider.create(sliderElement, {
 const onCheckedOrigin = () => sliderContainer.classList.add('hidden');
 const noCheckedOrigin = () => sliderContainer.classList.remove('hidden');
 
-let elementData = '';
-let oldElementData = '';
+const addFilter = () => {
+  const sliderValue = sliderElement.noUiSlider.get();
+  const cretedFilter = `${elementData.filterValue }(${ sliderValue }${elementData.filterUnit })`;
+  picturePreview.style.filter = cretedFilter;
+  picturePreview.classList.add(`effects__preview--${ elementData.filterName}`);
+};
+
+const deleteFilter = () => {
+  picturePreview.style.filter = '';
+  picturePreview.classList.remove(`effects__preview--${ oldElementData.filterName}`);
+};
 
 sliderElement.noUiSlider.on('update', () => {
   valueElement.value = sliderElement.noUiSlider.get();
@@ -128,22 +140,9 @@ for (let i = 0; i <= filters.length - 1; i++) {
   }
 }
 
-function addFilter() {
-  const sliderValue = sliderElement.noUiSlider.get();
-  const cretedFilter = `${elementData.filterValue }(${ sliderValue }${elementData.filterUnit })`;
-  picturePreview.style.filter = cretedFilter;
-  picturePreview.classList.add(`effects__preview--${ elementData.filterName}`);
-}
-
-function deleteFilter () {
-  picturePreview.style.filter = '';
-  picturePreview.classList.remove(`effects__preview--${ oldElementData.filterName}`);
-}
-
-
-function defaultFilter () {
+const defaultFilter = () => {
   deleteFilter();
   onCheckedOrigin();
-}
+};
 
 export {defaultFilter};
