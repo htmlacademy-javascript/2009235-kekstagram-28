@@ -78,3 +78,5 @@ commentInput.addEventListener('keydown', (evt) => {
     evt.stopPropagation();
   }
 });
+
+export {closeUserModal};
