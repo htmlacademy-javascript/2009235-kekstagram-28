@@ -1,5 +1,6 @@
 const VIEW_COMMENTS_COUNT = 5;
 const usersComments = document.querySelector('.social__comments').children;
+let viewCommentsCount = VIEW_COMMENTS_COUNT;
 
 const modalWindowShowCommentsCount = document.querySelector('.social__comment-count');
 const modalWindowShowCommentsButton = document.querySelector('.comments-loader');
@@ -20,21 +21,22 @@ const showCommentsCount = () => {
 };
 
 const showFirstComments = () => {
+  viewCommentsCount = VIEW_COMMENTS_COUNT;
   for (let i = usersComments.length - 1; i >= VIEW_COMMENTS_COUNT; i--) {
     usersComments[i].classList.add('hidden');
   }
   showCommentsCount();
 };
 
-const showNewCountComments = (viewCommentsCount) => {
-  const beforeviewCommentsCount = viewCommentsCount - VIEW_COMMENTS_COUNT - 1;
+const showNewCountComments = (commentsCount) => {
+  const beforeviewCommentsCount = commentsCount - VIEW_COMMENTS_COUNT - 1;
 
-  if (usersComments.length < viewCommentsCount) {
+  if (usersComments.length < commentsCount) {
     for (let i = beforeviewCommentsCount; i < usersComments.length; i++) {
       usersComments[i].classList.remove('hidden');
     }
   } else {
-    for (let i = beforeviewCommentsCount; i < viewCommentsCount; i++) {
+    for (let i = beforeviewCommentsCount; i < commentsCount; i++) {
       usersComments[i].classList.remove('hidden');
     }
   }
@@ -43,7 +45,6 @@ const showNewCountComments = (viewCommentsCount) => {
 };
 
 modalWindowShowCommentsButton.addEventListener('click', () => {
-  let viewCommentsCount = VIEW_COMMENTS_COUNT;
   viewCommentsCount += VIEW_COMMENTS_COUNT;
   showNewCountComments(viewCommentsCount);
 });

@@ -1,6 +1,6 @@
-import {posts} from './add-pictures.js';
+import {simularPictures} from './add-pictures.js';
 import {showFirstComments} from './show-modal-messages.js';
-const postsData = posts;
+const postsData = simularPictures;
 //console.log(postsData);
 
 const modalWindow = document.querySelector('.big-picture');
