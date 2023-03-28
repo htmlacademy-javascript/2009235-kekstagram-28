@@ -56,8 +56,8 @@ function openLoadPictureMessageSuccess () {
 
 function closeLoadPictureMessage () {
   document.body.classList.remove('modal-open');
-
   document.removeEventListener('keydown', onDocumentKeydown);
+
   const errorModalWindow = document.querySelector('.error');
   const successModalWindow = document.querySelector('.success');
 
