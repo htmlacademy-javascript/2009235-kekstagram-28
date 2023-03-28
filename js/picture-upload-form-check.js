@@ -1,5 +1,7 @@
 import {showAlert} from './utils.js';
 import {sendData} from './api.js';
+import {openLoadPictureMessageSuccess, openLoadPictureMessageError} from './picture-load-modal-messages.js';
+import {closeUserModal} from './picture-load-modal.js';
 
 const SubmitButtonText = {
   IDLE: 'Опубликовать',
@@ -129,9 +131,10 @@ const setUserFormSubmit = (onSuccess) => {
       blockSubmitButton();
       sendData(new FormData(evt.target))
         .then(onSuccess)
-        .then(showAlert('Данные усппешно отправлены.'))
+        .then(openLoadPictureMessageSuccess())
         .catch(
           (err) => {
+            openLoadPictureMessageError();
             showAlert(err.message);
           }
         )
@@ -139,5 +142,7 @@ const setUserFormSubmit = (onSuccess) => {
     }
   });
 };
+
+setUserFormSubmit(closeUserModal);
 
 export {pristine, setUserFormSubmit};
