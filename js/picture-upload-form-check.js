@@ -136,14 +136,14 @@ uploadImageForm.addEventListener('submit', (evt) => {
 async function postPostData (formData) {
   try {
     await sendData(formData);
-    unblockSubmitButton();
     closeUserModal();
     openLoadPictureMessageSuccess();
   } catch (err) {
     showAlert(err.message);
-    unblockSubmitButton();
     closeUserModal();
     openLoadPictureMessageError();
+  } finally {
+    unblockSubmitButton();
   }
 }
 
