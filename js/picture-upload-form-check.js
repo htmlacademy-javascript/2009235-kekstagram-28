@@ -122,27 +122,29 @@ const unblockSubmitButton = () => {
 
 /*----------*/
 
-const setUserFormSubmit = (onSuccess) => {
-  uploadImageForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    const isValid = pristine.validate();
+uploadImageForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  const isValid = pristine.validate();
 
-    if (isValid) {
-      blockSubmitButton();
-      sendData(new FormData(evt.target))
-        .then(onSuccess)
-        .then(openLoadPictureMessageSuccess())
-        .catch(
-          (err) => {
-            openLoadPictureMessageError();
-            showAlert(err.message);
-          }
-        )
-        .finally(unblockSubmitButton);
-    }
-  });
-};
+  if (isValid) {
+    blockSubmitButton();
+    postPostData(new FormData(evt.target));
+  }
+});
 
-setUserFormSubmit(closeUserModal);
 
-export {pristine, setUserFormSubmit};
+async function postPostData (formData) {
+  try {
+    await sendData(formData);
+    unblockSubmitButton();
+    closeUserModal();
+    openLoadPictureMessageSuccess();
+  } catch (err) {
+    showAlert(err.message);
+    unblockSubmitButton();
+    closeUserModal();
+    openLoadPictureMessageError();
+  }
+}
+
+export {pristine};
