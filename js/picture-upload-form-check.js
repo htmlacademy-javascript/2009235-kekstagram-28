@@ -1,3 +1,13 @@
+import {showAlert} from './utils.js';
+import {sendData} from './api.js';
+import {openLoadPictureMessageSuccess, openLoadPictureMessageError} from './picture-load-modal-messages.js';
+import {closeUserModal} from './picture-load-modal.js';
+
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Опубликовывается...'
+};
+
 const MAX_HASHTAGS_COUNT = 5;
 const MAX_HASHTAG_LENGHT = 20;
 const MAX_COMMENT_LENGTH = 140;
@@ -6,6 +16,7 @@ const uploadImageForm = document.querySelector('#upload-select-image');
 const uploadFile = uploadImageForm.querySelector('#upload-file');
 const hashtagsInput = uploadImageForm.querySelector('input[name="hashtags"]');
 const commentInput = uploadImageForm.querySelector('textarea[name="description"]');
+const submitButton = uploadImageForm.querySelector('button[type="submit"]');
 
 const regexpHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 let hashtagsErrorMessage = '';
@@ -99,11 +110,41 @@ pristine.addValidator(
 
 /*----------*/
 
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
+};
+
+/*----------*/
+
 uploadImageForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
   const isValid = pristine.validate();
-  if (!isValid) {
-    evt.preventDefault();
+
+  if (isValid) {
+    blockSubmitButton();
+    postPostData(new FormData(evt.target));
   }
 });
+
+
+async function postPostData (formData) {
+  try {
+    await sendData(formData);
+    closeUserModal();
+    openLoadPictureMessageSuccess();
+  } catch (err) {
+    showAlert(err.message);
+    closeUserModal();
+    openLoadPictureMessageError();
+  } finally {
+    unblockSubmitButton();
+  }
+}
 
 export {pristine};

@@ -1,12 +1,16 @@
-import {simularPosts} from './simular-posts.js';
+//import {simularPosts} from './simular-posts.js';
+import {getPostsData} from './get-posts.js';
+
 
 const picturesList = document.querySelector('.pictures');
 const newPictureTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
 
-const POSTS_COUNT = 25;
-const simularPictures = simularPosts(POSTS_COUNT);
+//const POSTS_COUNT = 25;
+//const simularPictures = simularPosts(POSTS_COUNT);
+
+const simularPictures = await getPostsData();
 
 const simularListFragment = document.createDocumentFragment();
 
