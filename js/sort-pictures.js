@@ -1,9 +1,12 @@
-import {simularPictures, addPosts} from './add-pictures.js';
+import {addPosts} from './add-pictures.js';
 
-const picturesList = document.querySelector('.pictures');
-
-const postsData = simularPictures;
 const PICTURES_RANDOM_COUNT = 10;
+const picturesList = document.querySelector('.pictures');
+let postsData = [];
+
+const getPostsDataForSort = (data) => {
+  postsData = data;
+};
 
 const clearPictures = () => {
   const addedPictures = picturesList.querySelectorAll('.picture');
@@ -14,7 +17,6 @@ const getRandomPicture = () => Math.random() - 0.5;
 
 const sortRandom = () => {
   const randomPictures = postsData.slice().sort(getRandomPicture).slice(0, PICTURES_RANDOM_COUNT);
-  clearPictures();
   addPosts(randomPictures);
 };
 
@@ -22,16 +24,13 @@ const compareMoreDiscussed = (pictureA, pictureB) => pictureB.comments.length - 
 
 const sortDiscussed = () => {
   const discussedPictures = postsData.slice().sort(compareMoreDiscussed);
-  clearPictures();
   addPosts(discussedPictures);
 };
 
-const sortDefault = () => {
-  clearPictures();
-  addPosts(postsData);
-};
+const sortDefault = () => addPosts(postsData);
 
 const startSort = (id) => {
+  clearPictures();
   if (id === 'filter-random') {
     sortRandom();
   } else if (id === 'filter-discussed') {
@@ -41,4 +40,4 @@ const startSort = (id) => {
   }
 };
 
-export {startSort};
+export {startSort, getPostsDataForSort};

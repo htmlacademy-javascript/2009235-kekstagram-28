@@ -7,10 +7,6 @@ const pictureFiltersButtons = document.querySelectorAll('.img-filters__button');
 
 const showPicturesFilters = () => picturesFilters.classList.remove('img-filters--inactive');
 
-if (document.querySelector('.picture')) {
-  showPicturesFilters();
-}
-
 const removeActiveClass = () => pictureFiltersButtons.forEach((pictureFiltersButton) => pictureFiltersButton.classList.remove('img-filters__button--active'));
 
 const listenPictureFiltersButtons = (pictureFiltersButton) => {
