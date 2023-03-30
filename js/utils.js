@@ -1,4 +1,5 @@
 const ALERT_SHOW_TIME = 5000;
+const DEBOUNSE_DEFAULT_TIME = 500;
 
 const getRandomInteger = (min, max) => {
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
@@ -59,6 +60,14 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+const debounce = (callback, timeoutDelay = DEBOUNSE_DEFAULT_TIME) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
 export {
   getRandomInteger,
   createRandomIdFromRangeGenerator,
@@ -66,4 +75,5 @@ export {
   isEscapeKey,
   isEnterKey,
   showAlert,
+  debounce,
 };

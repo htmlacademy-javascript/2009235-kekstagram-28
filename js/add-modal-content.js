@@ -1,14 +1,17 @@
-import {simularPictures} from './add-pictures.js';
 import {showFirstComments} from './show-modal-messages.js';
-const postsData = simularPictures;
-//console.log(postsData);
+let postsData = [];
 
 const modalWindow = document.querySelector('.big-picture');
 const modalWindowImage = modalWindow.querySelector('img');
 const modalWindowDescription = modalWindow.querySelector('.social__caption');
 const modalWindowLikesCount = modalWindow.querySelector('.likes-count');
 const modalWindowCommentsCount = modalWindow.querySelector('.comments-count');
+const modalWindowCommentsList = modalWindow.querySelector('.social__comments');
+const modalWindowCommentsItem = modalWindow.querySelector('.social__comment');
 
+const getPostsDataForBigPicture = (data) => {
+  postsData = data;
+};
 
 const getPostData = (userModalOpenElement) => {
   const postID = +userModalOpenElement.dataset.pictureId;
@@ -16,9 +19,6 @@ const getPostData = (userModalOpenElement) => {
 
   return postData;
 };
-
-const modalWindowCommentsList = modalWindow.querySelector('.social__comments');
-const modalWindowCommentsItem = modalWindow.querySelector('.social__comment');
 
 const addComments = (postData) => {
   modalWindowCommentsList.innerHTML = '';
@@ -50,4 +50,4 @@ const userModalElementAddContent = (userModalOpenElement) => {
   showFirstComments();
 };
 
-export {userModalElementAddContent};
+export {userModalElementAddContent, getPostsDataForBigPicture};

@@ -2,6 +2,7 @@ import {isEscapeKey, isEnterKey} from './utils.js';
 import {pristine} from './picture-upload-form-check.js';
 import {setDefaultZoomValue} from './set-picture-size.js';
 import {defaultFilter} from './set-picture-filter.js';
+import {changePicturePreview} from './picture-load-modal-picture.js';
 
 const userModalElement = document.querySelector('.img-upload__overlay');
 const userModalOpenElement = document.querySelector('#upload-file');
@@ -44,7 +45,8 @@ function closeUserModal () {
 }
 
 
-userModalOpenElement.addEventListener('change', () => {
+userModalOpenElement.addEventListener('change', (evt) => {
+  changePicturePreview(evt);
   openUserModal();
 });
 
