@@ -58,8 +58,6 @@ function findBigPicturelOpenElements () {
   }
 }
 
-findBigPicturelOpenElements();
-
 bigPictureModalCloseElement.addEventListener('click', () => {
   closeBigPictureModal();
 });
