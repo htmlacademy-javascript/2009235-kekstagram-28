@@ -1,7 +1,7 @@
 import './get-posts.js';
-import './picture-modal.js';
-import './picture-load-modal.js';
-import './picture-upload-form-check.js';
-import './set-picture-size.js';
-import './set-picture-filter.js';
-import './show-pictures-filters.js';
+import './big-picture-modal.js';
+import './user-picture-modal.js';
+import './user-picture-upload-form-check.js';
+import './user-picture-set-picture-size.js';
+import './user-picture-set-picture-filter.js';
+import './pictures-show-sorts.js';

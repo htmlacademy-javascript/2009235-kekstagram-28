@@ -1,5 +1,5 @@
-import {startSort} from './sort-pictures.js';
-import {findModalOpenElements} from './picture-modal.js';
+import {startSort} from './pictures-sort.js';
+import {findBigPicturelOpenElements} from './big-picture-modal.js';
 import {debounce} from './utils.js';
 
 const picturesFilters = document.querySelector('.img-filters');
@@ -15,7 +15,7 @@ const listenPictureFiltersButtons = (pictureFiltersButton) => {
     evt.target.classList.add('img-filters__button--active');
     const debouncedSort = debounce(() => {
       startSort(evt.target.id);
-      findModalOpenElements();
+      findBigPicturelOpenElements();
     });
     debouncedSort();
   });
