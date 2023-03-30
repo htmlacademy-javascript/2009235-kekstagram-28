@@ -50,11 +50,15 @@ function listenModalOpenElement (item) {
   });
 }
 
-for (let i = userModalOpenElements.length - 1; i >= 0; i--) {
-  if (userModalOpenElements[i].classList.contains('picture')) {
-    listenModalOpenElement(userModalOpenElements[i]);
+function findModalOpenElements () {
+  for (let i = userModalOpenElements.length - 1; i >= 0; i--) {
+    if (userModalOpenElements[i].classList.contains('picture')) {
+      listenModalOpenElement(userModalOpenElements[i]);
+    }
   }
 }
+
+findModalOpenElements();
 
 userModalCloseElement.addEventListener('click', () => {
   closeUserModal();
@@ -65,3 +69,5 @@ userModalCloseElement.addEventListener('keydown', (evt) => {
     closeUserModal();
   }
 });
+
+export {findModalOpenElements};

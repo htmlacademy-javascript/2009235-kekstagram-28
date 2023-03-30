@@ -12,20 +12,22 @@ const newPictureTemplate = document.querySelector('#picture')
 
 const simularPictures = await getPostsData();
 
-const simularListFragment = document.createDocumentFragment();
+const addPosts = (pisturesData) => {
+  const simularListFragment = document.createDocumentFragment();
 
-simularPictures.forEach(({ url, description, likes, comments, id}) => {
-  const pictureElement = newPictureTemplate.cloneNode(true);
-  pictureElement.querySelector('.picture__img').src = url;
-  pictureElement.querySelector('.picture__img').alt = description;
-  pictureElement.querySelector('.picture__likes').textContent = likes;
-  pictureElement.querySelector('.picture__comments').textContent = comments.length;
-  pictureElement.dataset.pictureId = id;
-  simularListFragment.appendChild(pictureElement);
-});
+  pisturesData.forEach(({ url, description, likes, comments, id}) => {
+    const pictureElement = newPictureTemplate.cloneNode(true);
+    pictureElement.querySelector('.picture__img').src = url;
+    pictureElement.querySelector('.picture__img').alt = description;
+    pictureElement.querySelector('.picture__likes').textContent = likes;
+    pictureElement.querySelector('.picture__comments').textContent = comments.length;
+    pictureElement.dataset.pictureId = id;
+    simularListFragment.appendChild(pictureElement);
+  });
 
-const addPosts = () => picturesList.appendChild(simularListFragment);
+  picturesList.appendChild(simularListFragment);
+};
 
-addPosts();
+addPosts(simularPictures);
 
-export {simularPictures};
+export {simularPictures, addPosts};
