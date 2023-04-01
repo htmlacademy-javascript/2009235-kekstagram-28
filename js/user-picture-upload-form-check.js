@@ -1,7 +1,7 @@
 import {showAlert} from './utils.js';
 import {sendData} from './api.js';
-import {openLoadPictureMessageSuccess, openLoadPictureMessageError} from './picture-load-modal-messages.js';
-import {closeUserModal} from './picture-load-modal.js';
+import {openLoadPictureMessageSuccess, openLoadPictureMessageError} from './user-picture-post-result-messages.js';
+import {closeUserPictureModal} from './user-picture-modal.js';
 
 const SubmitButtonText = {
   IDLE: 'Опубликовать',
@@ -136,11 +136,11 @@ uploadImageForm.addEventListener('submit', (evt) => {
 async function postPostData (formData) {
   try {
     await sendData(formData);
-    closeUserModal();
+    closeUserPictureModal();
     openLoadPictureMessageSuccess();
   } catch (err) {
     showAlert(err.message);
-    closeUserModal();
+    closeUserPictureModal();
     openLoadPictureMessageError();
   } finally {
     unblockSubmitButton();
