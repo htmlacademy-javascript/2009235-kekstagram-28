@@ -1,4 +1,5 @@
 import {addPosts} from './add-pictures.js';
+import {findBigPicturelOpenElements} from './big-picture-modal.js';
 
 const PICTURES_RANDOM_COUNT = 10;
 const picturesList = document.querySelector('.pictures');
@@ -38,6 +39,7 @@ const startSort = (id) => {
   } else {
     sortDefault();
   }
+  findBigPicturelOpenElements();
 };
 
 export {startSort, getPostsDataForSort};
